@@ -1,6 +1,7 @@
 # Software-System-HR-Asp.net
-Software System HR Asp.net core % With Crud System  show, Delete, Update, Create
+Software System HR Asp.net core5 MVC With Crud System  show, Delete, Update, Create
+## steps to run projects:
 
-## You Should rename Local DataBase Server in AppSettings
-## you should make add migrations 
-## you should make update the database.
+### 1- You Should rename Local DataBase Server in AppSettings
+### 2- you should make add migrations 
+### 3- you should make update the database.
