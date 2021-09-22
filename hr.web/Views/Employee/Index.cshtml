@@ -1,0 +1,64 @@
+﻿@model List<hr.web.ViewModel.EmployeeViewModel>
+
+
+
+<form asp-controller="Employee" asp-action="Index" method="get">
+
+    <div class="row">
+        <div class="col-md-4">
+            <a asp-controller="Employee" asp-action="Create" class="btn btn-primary"> Add New Employee !</a>
+        </div>
+    </div>
+
+
+</form>
+</br>
+
+@if (Model.Any())
+{
+    <table class="table table-hover">
+        <tr>
+            <th> Id </th>
+            <th> Name </th>
+            <th> Email </th>
+            <th> Phone </th>
+            <th> DateOfBirth </th>
+            <th> Image </th>
+            <th> Department </th>
+            <th> Date Create </th>
+            <th> Actions </th>
+
+        </tr>
+        @foreach (var item in Model)
+        {
+    <tr>
+        <th> @item.Id</th>
+        <th> @item.Name</th>
+        <th> @item.Email</th>
+        <th> @item.Phone</th>
+        <th> @item.DOB.ToString("yyyy/MM/dd") </th>
+        <th> <img class="img-fluid" width="200" src="~/Images/@item.ImgUrl" alt="Alternate Text" /></th>
+
+        <th> @item.Department</th>
+
+        <th>@item.CreateAt.ToString("yyyy/MM/dd") </th>
+
+        <th>
+            <a class="btn btn-warning" href="~/Employee/Update/@item.Id">Update</a>
+            <a class="btn btn-danger" href="~/Employee/Delete/@item.Id">Delete</a>
+
+
+        </th>
+
+
+    </tr>
+        }
+    </table>
+
+}
+else
+{
+    <div class="alert alert-warning">
+        No Data Base Found
+    </div>
+}

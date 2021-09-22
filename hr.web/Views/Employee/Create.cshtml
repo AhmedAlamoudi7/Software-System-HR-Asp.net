@@ -1,0 +1,56 @@
+﻿@model hr.web.ViewModel.Employee.CreateEmployeeViewModel
+
+<form asp-action="Create" enctype="multipart/form-data">
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label class="label-control">Employee Name</label>
+                <input required asp-for="Name" class="form-control" />
+            </div>
+
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label class="label-control">Email</label>
+                <input required asp-for="Email" class="form-control" />
+            </div>
+
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label class="label-control">Phone</label>
+                <input required asp-for="Phone" class="form-control" />
+            </div>
+
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label class="label-control">DateOfBirth</label>
+                <input required asp-for="DOB" class="form-control" />
+            </div>
+
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label asp-for="ImgUrl" class="label-control">Image</label>
+                <input required type="file" asp-for="ImgUrl" class="form-control" />
+            </div>
+
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label class="label-control">Department</label>
+                <select required asp-for="DepartmentId" asp-items="ViewBag.DepartmentList" class="form-control"></select>
+            </div>
+
+        </div>
+    </div>
+
+    <input type="submit" value="Save" class="btn btn-primary" />
+    <a asp-action="Index" asp-controller="Employee" class="btn btn-danger">Back</a>
+</form>
