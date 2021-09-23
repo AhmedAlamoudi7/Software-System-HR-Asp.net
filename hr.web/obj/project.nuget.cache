@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "RtVzc8tLOR8YrYwImkvOWqQ1m1LjvOhsWvu7pTUm8TQPnVkMYbRhBJYBfl6eFk6gIT6deW8lex82CA2+thYZ9w==",
+  "dgSpecHash": "VCQK74gCJQeXfVLQ57iGyGyEzCQG/Po30JLdeb2WXY2tWJdB+73iYQnhzjuRJvlWYD+mwQ2aDlA7ul3v+E2Rkg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\khatib\\Desktop\\hr\\hr.web\\hr.web.csproj",
+  "projectFilePath": "C:\\Users\\khatib\\Desktop\\ICT-Bridge-Asp\\Lectures\\Lecture-5\\hr\\hr.web\\hr.web.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\khatib\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\khatib\\.nuget\\packages\\microsoft.aspnetcore.authentication.abstractions\\2.2.0\\microsoft.aspnetcore.authentication.abstractions.2.2.0.nupkg.sha512",

@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace hr.web.ViewModel.Department
+namespace hr.web.dto.Department.UpdateDepartmentDto
 {
-    public class UpdateDepartmentViewModel
+    public class UpdateDepartmentDto
     {
         public int Id { get; set; }
         public string Name { get; set; }

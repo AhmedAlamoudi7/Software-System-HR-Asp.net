@@ -6936,11 +6936,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\khatib\\Desktop\\hr\\hr.web\\hr.web.csproj",
+      "projectUniqueName": "C:\\Users\\khatib\\Desktop\\ICT-Bridge-Asp\\Lectures\\Lecture-5\\hr\\hr.web\\hr.web.csproj",
       "projectName": "hr.web",
-      "projectPath": "C:\\Users\\khatib\\Desktop\\hr\\hr.web\\hr.web.csproj",
+      "projectPath": "C:\\Users\\khatib\\Desktop\\ICT-Bridge-Asp\\Lectures\\Lecture-5\\hr\\hr.web\\hr.web.csproj",
       "packagesPath": "C:\\Users\\khatib\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\khatib\\Desktop\\hr\\hr.web\\obj\\",
+      "outputPath": "C:\\Users\\khatib\\Desktop\\ICT-Bridge-Asp\\Lectures\\Lecture-5\\hr\\hr.web\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\khatib\\AppData\\Roaming\\NuGet\\NuGet.Config",
