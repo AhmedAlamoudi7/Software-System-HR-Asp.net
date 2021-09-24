@@ -1,7 +1,8 @@
 ﻿using hr.web.Data;
+using hr.web.dto.Employee.CreateEmployeeDto;
+using hr.web.dto.Employee.UpdateEmployeeDto;
 using hr.web.Service;
 using hr.web.ViewModel;
-using hr.web.ViewModel.Employee;
 using hr.Web.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -54,10 +55,19 @@ namespace hr.web.Controllers
 
         }
         [HttpPost]
-        public async Task<IActionResult> Create([FromForm] CreateEmployeeViewModel input)
+        public async Task<IActionResult> Create([FromForm] CreateEmployeeDto input)
         {
             if (ModelState.IsValid)
             {
+                //check 
+                var nameIsExist = _db.Employees.Any(x => x.Name == input.Name && !x.IsDelete);
+                if (nameIsExist)
+                {
+                    // viewBag message
+                    TempData["msg"] = "d: Name Are Already Exist !";
+                    return View(input);
+                }
+
                 var Employee = new Employee();
                 Employee.Name = input.Name;
                 Employee.Email = input.Email;
@@ -73,10 +83,14 @@ namespace hr.web.Controllers
                 Employee.DepartmentId = input.DepartmentId;
                 Employee.CreatedAt = DateTime.Now;
                 ViewData["DepartmentList"] = new SelectList(_db.Departments.Where(x => !x.IsDelete).ToList(), "Id", "Name");
+
                 await _db.Employees.AddAsync(Employee);
                 await _db.SaveChangesAsync();
-                return RedirectToAction("Index");
-            }
+            
+            // View Bags Message
+            TempData["msg"] = "s: Items Add Successfully !";
+            return RedirectToAction("Index");
+        }
             ViewData["DepartmentList"] = new SelectList(_db.Departments.Where(x => !x.IsDelete).ToList(), "Id", "Name");
             return View(input);
 
@@ -91,7 +105,7 @@ namespace hr.web.Controllers
             {
                 return NotFound();
             }
-            var EmployeesUpdate = new UpdateEmployeeViewModel();
+            var EmployeesUpdate = new UpdateEmployeeDto();
             EmployeesUpdate.Id = Employees.Id;
             EmployeesUpdate.Name = Employees.Name;
             EmployeesUpdate.Email = Employees.Email;
@@ -112,7 +126,7 @@ namespace hr.web.Controllers
         
 
         [HttpPost]
-        public async Task<IActionResult> Update(UpdateEmployeeViewModel input)
+        public async Task<IActionResult> Update(UpdateEmployeeDto input)
         {
             if (ModelState.IsValid)
             {
@@ -122,6 +136,15 @@ namespace hr.web.Controllers
                 {
                     return NotFound();
                 }
+                //check 
+                var nameIsExist = _db.Employees.Any(x => x.Name == input.Name && !x.IsDelete);
+                if (nameIsExist)
+                {
+                    // viewBag message
+                    TempData["msg"] = "d: Name Are Already Exist !";
+                    return View(input);
+                }
+
                 Employees.Id = input.Id;
                 Employees.Name = input.Name;
                 Employees.Name = input.Name;
@@ -138,7 +161,8 @@ namespace hr.web.Controllers
                 Employees.UpdatedAt = DateTime.Now;
                 _db.Employees.Update(Employees);
                 await _db.SaveChangesAsync();
-
+                // View Bags Message
+                TempData["msg"] = "s: Items Edited Successfully !";
                 return RedirectToAction("Index");
 
             }
@@ -160,6 +184,8 @@ namespace hr.web.Controllers
             Employees.IsDelete = true;
             _db.Employees.Update(Employees);
             await _db.SaveChangesAsync();
+            // View Bags Message
+            TempData["msg"] = "s: Items Delete Successfully !";
             return RedirectToAction("Index");
         }
     }

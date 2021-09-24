@@ -1,6 +1,7 @@
 ﻿using hr.web.Data;
+using hr.web.dto.Department.CreateDepartmentDto;
+using hr.web.dto.Department.UpdateDepartmentDto;
 using hr.web.ViewModel;
-using hr.web.ViewModel.Department;
 using hr.Web.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -45,16 +46,29 @@ namespace hr.web.Controllers
 
         }
         [HttpPost]
-        public async Task<IActionResult> Create(CreateDepartemntViewModel input)
+        public async Task<IActionResult> Create(CreateDepartmentDto input)
         {
             if (ModelState.IsValid)
             {
+                //check 
+                var nameIsExist = _db.Departments.Any(x => x.Name == input.Name && !x.IsDelete);
+                if (nameIsExist)
+                {
+                    // viewBag message
+                    TempData["msg"] = "d: Name Are Already Exist !";
+                    return View(input);
+                }
                 var Department = new Department();
                 Department.Name = input.Name;
                 Department.CreatedAt = DateTime.Now;
+         
                 await _db.Departments.AddAsync(Department);
                 await _db.SaveChangesAsync();
+        
+                // View Bags Message
+                TempData["msg"] = "s: Items Add Successfully !";
                 return RedirectToAction("Index");
+
             }
             return View(input);
  
@@ -69,14 +83,14 @@ namespace hr.web.Controllers
             {
                 return NotFound();
             }
-            var DepartmentUpdate = new UpdateDepartmentViewModel();
+            var DepartmentUpdate = new UpdateDepartmentDto();
             DepartmentUpdate.Id = Department.Id;
             DepartmentUpdate.Name = Department.Name;
             return View(DepartmentUpdate);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Update(UpdateDepartmentViewModel input)
+        public async Task<IActionResult> Update(UpdateDepartmentDto input)
         {
             if (ModelState.IsValid)
             {
@@ -86,12 +100,23 @@ namespace hr.web.Controllers
                 {
                     return NotFound();
                 }
+                //check 
+                var nameIsExist = _db.Departments.Any(x => x.Name == input.Name && !x.IsDelete);
+                if (nameIsExist)
+                {
+                    // viewBag message
+                    TempData["msg"] = "d: Name Are Already Exist !";
+                    return View(input);
+                }
+
                 Department.Name = input.Name;
                 Department.UpdatedAt = DateTime.Now;
-
-                _db.Departments.Update(Department);
+            
+      
+                 _db.Departments.Update(Department);
                 await  _db.SaveChangesAsync();
-
+                // View Bags Message
+                TempData["msg"] = "s: Items Edited Successfully !";
                 return RedirectToAction("Index");
 
             }
@@ -112,6 +137,8 @@ namespace hr.web.Controllers
             Department.IsDelete = true;
             _db.Departments.Update(Department);
             await _db.SaveChangesAsync();
+            // View Bags Message
+            TempData["msg"] = "s: Items Delete Successfully !";
             return RedirectToAction("Index");
         }
     }
